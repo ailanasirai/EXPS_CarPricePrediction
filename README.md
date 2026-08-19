@@ -24,6 +24,12 @@ The final model explains ~95% of the variance in car prices, with predictions av
 
 ---
 
+## Workflow
+
+![Project pipeline](images/pipeline_flow.svg)
+
+---
+
 ## Problem Statement
 
 Pricing a used car is a decision that combines dozens of interacting technical specifications — engine size, weight, brand reputation, fuel efficiency, and more. Manual pricing is inconsistent and hard to justify. This project builds a regression model that predicts a car's price from its specifications, and — just as importantly — explains *why* it arrives at that number, rather than acting as a black box.
@@ -54,10 +60,18 @@ Accurate, explainable price estimation is directly useful for dealerships, resal
 - Confirmed zero duplicate rows
 
 ### 2. Exploratory Data Analysis
+
+![Price distribution](images/price_distribution.png)
+
 - `price` is strongly right-skewed (skewness ≈ 1.81) — addressed via log transformation during modeling
 - `engine-size`, `curb-weight`, and `horsepower` show the strongest positive correlation with price (0.87, 0.83, 0.81)
 - `city-mpg` and `highway-mpg` show strong negative correlation (~-0.70) — fuel-efficient cars tend to be smaller, cheaper models
+
+![Feature correlation with price](images/correlation_barplot.png)
+
 - Brand carries pricing signal independent of specs: luxury brands (BMW, Porsche, Mercedes-Benz) cluster above $25,000, while economy brands (Chevrolet, Honda, Plymouth) sit under $10,000
+
+![Price distribution by brand](images/price_by_brand.png)
 
 ### 3. Feature Engineering
 - One-hot encoded all categorical variables (`make`, `body-style`, `drive-wheels`, `fuel-type`, etc.) since none have a natural order
@@ -89,9 +103,13 @@ An 80/20 train-test split (`random_state=42`) was used, with 5-fold cross-valida
 
 ## Error Analysis
 
+![Actual vs predicted price](images/actual_vs_predicted.png)
+
 Errors are **not random** — they concentrate systematically in the high-price segment. The five largest prediction errors were all for cars priced above $34,000, and the model consistently *underpredicts* these. This traces back to the EDA: luxury brands make up a small fraction of the 201 available rows, so the model has fewer examples to learn from in that price tier. This is a genuine limitation of dataset size rather than a flaw in the modeling approach — a larger, more balanced dataset across price tiers would likely close this gap.
 
 ## Explainability
+
+![Feature importance](images/feature_importance.png)
 
 Since Ridge is a linear model, its coefficients are directly interpretable. The strongest positive drivers of predicted price are `make_bmw`, `make_porsche`, `engine-location_rear`, `make_audi`, and `make_mercedes-benz` — confirming that brand identity adds a real premium beyond raw specifications. The strongest negative drivers are budget-oriented brands like `make_peugot`, `make_isuzu`, and `make_subaru`.
 
@@ -100,6 +118,12 @@ Since Ridge is a linear model, its coefficients are directly interpretable. The 
 ## Live Demo
 
 An interactive Gradio interface lets users enter a car's specifications and get an instant price estimate, using the same preprocessing pipeline as training to keep predictions consistent with the model's actual behavior.
+
+![Gradio interface overview](images/gradio_interface.png)
+
+![Gradio interface input form](images/gradio_interface_inputs.png)
+
+![Gradio interface prediction result](images/gradio_interface_result.png)
 
 *(Deployed on Hugging Face Spaces — link added after deployment)*
 
@@ -113,12 +137,18 @@ EXPS_CarPricePrediction/
 ├── LICENSE
 ├── requirements.txt
 ├── notebooks/
-│   └── car_price_prediction.ipynb
+│   └── EXPS_CarPricePrediction.ipynb
 ├── models/
 │   ├── car_price_model.pkl
 │   └── model_columns.pkl
-├── figures/
-│   └── (exported charts from the notebook)
+├── images/
+│   ├── pipeline_flow.svg
+│   ├── price_distribution.png
+│   ├── correlation_barplot.png
+│   ├── price_by_brand.png
+│   ├── actual_vs_predicted.png
+│   ├── feature_importance.png
+│   └── gradio_interface.png
 └── app.py                  # Gradio deployment script
 ```
 
@@ -130,7 +160,7 @@ EXPS_CarPricePrediction/
 git clone https://github.com/ailanasirai/EXPS_CarPricePrediction.git
 cd EXPS_CarPricePrediction
 pip install -r requirements.txt
-jupyter notebook notebooks/car_price_prediction.ipynb
+jupyter notebook notebooks/EXPS_CarPricePrediction.ipynb
 ```
 
 To run the live app locally:
@@ -174,3 +204,7 @@ Developed as part of the EXPS Nexus Data Science Internship (Expert Petroleum Se
 
 **Aila Nasir**
 [LinkedIn](https://linkedin.com/in/ailanasirai) · [GitHub](https://github.com/ailanasirai)
+
+---
+
+*I certify that this project was independently developed, tested, and documented by me — full code and commit history available on [GitHub](https://github.com/ailanasirai/EXPS_CarPricePrediction), portfolio and background on [LinkedIn](https://linkedin.com/in/ailanasirai).*
