@@ -7,7 +7,9 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
 
-Predicting used-car market prices from technical specifications using a Ridge Regression model, with a full workflow covering data cleaning, EDA, feature engineering, model comparison, hyperparameter tuning, error analysis, and explainability — deployed as an interactive web app.
+**[Try the live app on Hugging Face Spaces →](https://huggingface.co/spaces/ailanasirai/car-price-predictor)**
+
+Predicting used-car market prices from technical specifications using a Ridge Regression model, with a full workflow covering data cleaning, EDA, feature engineering, model comparison, hyperparameter tuning, error analysis, and explainability — deployed live as an interactive web app on Hugging Face Spaces.
 
 ---
 
@@ -117,15 +119,17 @@ Since Ridge is a linear model, its coefficients are directly interpretable. The 
 
 ## Live Demo
 
-An interactive Gradio interface lets users enter a car's specifications and get an instant price estimate, using the same preprocessing pipeline as training to keep predictions consistent with the model's actual behavior.
+**Live app:** [huggingface.co/spaces/ailanasirai/car-price-predictor](https://huggingface.co/spaces/ailanasirai/car-price-predictor)
+
+An interactive Gradio interface lets users enter a car's specifications and get an instant price estimate, using the same preprocessing pipeline as training to keep predictions consistent with the model's actual behavior. Deployed on Hugging Face Spaces.
+
+![Deployed on Hugging Face Spaces](huggingface_live_deployment.png)
 
 ![Gradio interface overview](gradio_interface.png)
 
 ![Gradio interface input form](gradio_interface_inputs.png)
 
 ![Gradio interface prediction result](gradio_interface_result.png)
-
-*(Deployed on Hugging Face Spaces — link added after deployment)*
 
 ---
 
@@ -147,10 +151,11 @@ EXPS_CarPricePrediction/
 ├── price_by_brand.png
 ├── actual_vs_predicted.png
 ├── feature_importance.png
+├── huggingface_live_deployment.png
 ├── gradio_interface.png
 ├── gradio_interface_inputs.png
 ├── gradio_interface_result.png
-└── app.py                  # Gradio deployment script
+└── app.py                  # Gradio deployment script (live on Hugging Face Spaces)
 ```
 
 ---
@@ -170,6 +175,8 @@ To run the live app locally:
 python app.py
 ```
 
+Or try it instantly without any setup: **[huggingface.co/spaces/ailanasirai/car-price-predictor](https://huggingface.co/spaces/ailanasirai/car-price-predictor)**
+
 ---
 
 ## Technologies Used
@@ -179,6 +186,7 @@ python app.py
 - **ucimlrepo** — reproducible dataset access
 - **matplotlib, seaborn** — visualization
 - **Gradio** — interactive deployment
+- **Hugging Face Spaces** — live hosting
 - **joblib** — model persistence
 
 ---
@@ -204,7 +212,7 @@ Developed as part of the EXPS Nexus Data Science Internship (Expert Petroleum Se
 ## Author
 
 **Aila Nasir**
-[LinkedIn](https://linkedin.com/in/ailanasirai) · [GitHub](https://github.com/ailanasirai)
+[LinkedIn](https://linkedin.com/in/ailanasirai) · [GitHub](https://github.com/ailanasirai) · [Live App](https://huggingface.co/spaces/ailanasirai/car-price-predictor)
 
 ---
 
